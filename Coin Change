@@ -1,0 +1,43 @@
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+         if (amount <= 0) {
+            return 0;
+        }
+        
+        Queue<Integer> queue = new LinkedList<>();
+        Set<Integer> seen = new HashSet<>();
+        
+        queue.offer(amount);
+        seen.add(amount);
+        
+        int level = 1;
+        
+        while (!queue.isEmpty()) {
+            
+            Integer size = queue.size();
+           // System.out.println(size);
+            
+            for (int i = 0; i < size; i++) {
+                Integer node = queue.poll();
+
+                for (int coin : coins) {
+                    Integer neighbor = node - coin;
+
+                    if (neighbor == 0) {
+                        return level;
+                    }
+
+                    if (neighbor > 0 && !seen.contains(neighbor)) {
+                        queue.offer(neighbor);
+                        seen.add(neighbor);
+                    }
+                }
+            }
+            System.out.println(level);
+
+            level++;
+        }
+        
+        return -1;
+    }
+}
