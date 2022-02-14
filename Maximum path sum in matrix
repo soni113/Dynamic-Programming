@@ -1,0 +1,24 @@
+class Solution {
+	int findMaxPath(int[][] M) {
+	    // add you logic here
+		int n = M.length;
+		int m = M[0].length;
+		for (int i = n-1;i>=0;i--){
+            for (int j = 1; j < m; j++){
+               int b = (i == n-1) ? 0 : M[i+1][j];
+				
+                int b_left = (i == n-1 || j == 0) ? 0 : M[i+1][j-1];
+                int b_right = (i == n-1 || j == m-1) ? 0 : M[i+1][j+1];
+                
+                M[i][j] += Math.max(b,Math.max(b_left,b_right));
+               // System.out.println(Matrix[i][j]);
+            }
+        }
+        int ans = Integer.MIN_VALUE;
+        
+        for (int j = 0; j < m; j++){
+            ans = Math.max(ans,M[0][j]);
+        }
+        return ans;
+	}
+}
