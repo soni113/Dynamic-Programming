@@ -1,0 +1,17 @@
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        int cash = 0;
+        int min = prices[0];
+        for(int i: prices)
+        {
+            if(i < min) 
+                min = i;
+            else if(i > min + fee)
+            { 
+                cash += i - min - fee; 
+                min = i - fee; 
+            }
+        }
+        return cash;
+    }
+}
